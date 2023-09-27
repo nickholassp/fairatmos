@@ -27,3 +27,14 @@ jobs:
       with:
         push: true
         tags: nickhosp/wiki:latest
+
+    - name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+
+    - name: 'Deploy to CloudRun'
+      uses: 'google-github-actions/deploy-cloudrun@v1'
+      with:
+        service: 'wiki-stg'
+        image: 'nickhosp/wiki:latest'
