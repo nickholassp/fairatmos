@@ -5,14 +5,14 @@ name: Go
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main" ]    
   pull_request:
     branches: [ "main" ]
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
+    environment: production
     steps:
     - uses: actions/checkout@v3
 
@@ -24,5 +24,8 @@ jobs:
     - name: Build
       run: cd go/ && go build wiki.go
 
-    - name: Test
+    # - name: Test
+    #   run: go test
+
+    - name: Running
       run: cd go/ && ./wiki
