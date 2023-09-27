@@ -1,6 +1,0 @@
-name: Build Web Application
-on: [push]
-jobs:
-  Build_Web_Application:
-    runs-on: ubuntu-latest
-    steps:
