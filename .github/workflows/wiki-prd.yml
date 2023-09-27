@@ -23,7 +23,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         push: true
-        tags: nickhosp/wiki:prod-${{vars.GITHUB_SHA}}
+        tags: nickhosp/wiki:prod-${{ github.sha }}
 
     - name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v1'
@@ -34,4 +34,4 @@ jobs:
       uses: 'google-github-actions/deploy-cloudrun@v1'
       with:
         service: 'wiki-prd'
-        image: 'nickhosp/wiki:prod-${{vars.GITHUB_SHA}}'
+        image: 'nickhosp/wiki:prod-${{ github.sha }}'

@@ -25,7 +25,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         push: true
-        tags: nickhosp/wiki:latest
+        tags: nickhosp/wiki:stg-${{ github.sha }}
 
     - name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v1'
@@ -36,4 +36,4 @@ jobs:
       uses: 'google-github-actions/deploy-cloudrun@v1'
       with:
         service: 'wiki-stg'
-        image: 'nickhosp/wiki:latest'
+        image: 'nickhosp/wiki:stg-${{ github.sha }}'
