@@ -6,13 +6,10 @@ name: Go
 on:
   push:
     branches: [ "main" ]    
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    # environment: production
     steps:
     - uses: actions/checkout@v3
 
@@ -26,7 +23,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         push: true
-        tags: nickhosp/wiki:latest
+        tags: nickhosp/wiki:prod-${GITHUB_SHA}
 
     - name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v1'
@@ -36,5 +33,5 @@ jobs:
     - name: 'Deploy to CloudRun'
       uses: 'google-github-actions/deploy-cloudrun@v1'
       with:
-        service: 'wiki-stg'
-        image: 'nickhosp/wiki:latest'
+        service: 'wiki-prd'
+        image: 'nickhosp/wiki:prod-${GITHUB_SHA}'
